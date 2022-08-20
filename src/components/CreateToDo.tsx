@@ -1,36 +1,32 @@
 import { useForm } from "react-hook-form";
-import { useRecoilState, useRecoilValue } from "recoil";
-import styled from "styled-components";
-import { categoryState, toDoState } from "../atoms";
+import { useSetRecoilState } from "recoil";
+import { toDoState } from "../atoms";
 
-interface IterFaceForm {
+interface IForm {
   toDo: string;
 }
 
-const Form = styled.form``;
-
 function CreateToDo() {
-  const [toDos, setToDos] = useRecoilState(toDoState);
-  const category = useRecoilValue(categoryState);
-  const { register, handleSubmit, setValue } = useForm<IterFaceForm>();
-  const handleValid = ({ toDo }: IterFaceForm) => {
+  const setToDos = useSetRecoilState(toDoState);
+  const { register, handleSubmit, setValue } = useForm<IForm>();
+  const handleValid = ({ toDo }: IForm) => {
     setToDos((oldToDos) => [
-      { text: toDo, id: Date.now(), category },
+      { text: toDo, id: Date.now(), category: "TO_DO" },
       ...oldToDos,
     ]);
     setValue("toDo", "");
   };
-
   return (
-    <Form onSubmit={handleSubmit(handleValid)}>
+    <form onSubmit={handleSubmit(handleValid)}>
       <input
         {...register("toDo", {
-          required: "할 일을 작성하세요.",
+          required: "Please write a To Do",
         })}
-        placeholder="할 일을 작성하세요."
+        placeholder="Write a to do"
       />
-      <button>추가하기</button>
-    </Form>
+      <button>Add</button>
+    </form>
   );
 }
+
 export default CreateToDo;

@@ -1,43 +1,32 @@
 import React from "react";
-import styled from "styled-components";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { categoriesState, IToDo, toDoState } from "../atoms";
-
-const Letter = styled.span`
-  font-size: 23px;
-`;
-
-const Btn = styled.button`
-  margin-left: 4px;
-`;
+import { useSetRecoilState } from "recoil";
+import { IToDo, toDoState } from "../atoms";
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
-  const categories = useRecoilValue(categoriesState);
-  const changeCategory = (selectedCategory: string) => {
-    setToDos((oldToDo) => {
-      const targetIndex = oldToDo.findIndex((toDo) => toDo.id === id);
-      const newToDo = { text, id, category: selectedCategory as any };
-      return [
-        ...oldToDo.slice(0, targetIndex),
-        newToDo,
-        ...oldToDo.slice(targetIndex + 1),
-      ];
-    });
+  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const {
+      currentTarget: { name },
+    } = event;
   };
-
   return (
     <li>
-      <Letter>{text}</Letter>
-      {Object.values(categories).map((availableCategory) => (
-        <Btn
-          disabled={availableCategory === category}
-          key={availableCategory}
-          onClick={() => changeCategory(availableCategory)}
-        >
-          {availableCategory}
-        </Btn>
-      ))}
+      <span>{text}</span>
+      {category !== "DOING" && (
+        <button name="DOING" onClick={onClick}>
+          Doing
+        </button>
+      )}
+      {category !== "TO_DO" && (
+        <button name="TO_DO" onClick={onClick}>
+          To Do
+        </button>
+      )}
+      {category !== "DONE" && (
+        <button name="DONE" onClick={onClick}>
+          Done
+        </button>
+      )}
     </li>
   );
 }
