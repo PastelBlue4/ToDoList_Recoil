@@ -10,3 +10,13 @@ export const toDoState = atom<IToDo[]>({
   key: "toDo",
   default: [],
 });
+
+export const doIngState = atom<IToDo[]>({
+  key: "doIng",
+  default: [],
+});
+
+export const doneState = atom<IToDo[]>({
+  key: "done",
+  default: [],
+});
