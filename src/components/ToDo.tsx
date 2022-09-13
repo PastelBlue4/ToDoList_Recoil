@@ -9,6 +9,7 @@ function ToDo({ text, category, id }: IToDo) {
     const {
       currentTarget: { name },
     } = event;
+  
 
     // 실행시킨 버튼으로 버튼의 category(name) 을 얻는다.
 
