@@ -1,11 +1,19 @@
+import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { isDarkAtom, toDoState } from "../atoms";
+import { categoryState, isDarkAtom, toDoState } from "../atoms";
+import CreateCategory from "./CreateCategory";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
 function ToDoList() {
   const toDos = useRecoilValue(toDoState);
+  const categories = useRecoilValue(categoryState);
+  const [currentCategory, setCurrentCategory] = useState("TO_DO");
   const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkAtom);
+  const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
+    setCurrentCategory(e.currentTarget.value);
+    console.log(e.currentTarget.value);
+  };
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
   return (
     <div>
@@ -20,10 +28,21 @@ function ToDoList() {
       <hr />
       <CreateToDo />
       <ul>
-        {toDos.map((toDo) => (
-          <ToDo key={toDo.id} {...toDo} />
-        ))}
+        <select onInput={onInput}>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+        {toDos
+          .filter((item) => item.category === currentCategory)
+          .map((toDo) => (
+            <ToDo key={toDo.id} {...toDo} />
+          ))}
       </ul>
+
+      <CreateCategory />
     </div>
   );
 }

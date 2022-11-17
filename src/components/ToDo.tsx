@@ -34,7 +34,7 @@ function ToDo({ text, category, id }: IToDo) {
       <li>
         <span>{text}</span>
         {CanMovecategories.map((category, index) => (
-          <button key={category} name={category}>
+          <button key={category} name={category} onClick={onClick}>
             {category}
           </button>
         ))}

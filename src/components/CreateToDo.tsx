@@ -24,7 +24,7 @@ function CreateToDo() {
         })}
         placeholder="Write a to do"
       />
-      <button>Add</button>
+      <button>할 일 추가.</button>
     </form>
   );
 }
