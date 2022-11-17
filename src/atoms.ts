@@ -3,7 +3,7 @@ import { atom } from "recoil";
 export interface IToDo {
   text: string;
   id: number;
-  category: "TO_DO" | "DOING" | "DONE";
+  category: string;
 }
 
 export const isDarkAtom = atom({
@@ -12,16 +12,11 @@ export const isDarkAtom = atom({
 });
 
 export const toDoState = atom<IToDo[]>({
-  key: "toDo",
+  key: "toDoState",
   default: [],
 });
 
-export const doIngState = atom<IToDo[]>({
-  key: "doIng",
-  default: [],
-});
-
-export const doneState = atom<IToDo[]>({
-  key: "done",
-  default: [],
+export const categoryState = atom({
+  key: "categorys",
+  default: ["TO_DO", "DOING", "DONE", "nothing", "그냥 하기싫은데"],
 });

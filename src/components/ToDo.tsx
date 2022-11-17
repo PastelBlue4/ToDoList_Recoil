@@ -1,17 +1,22 @@
 import React from "react";
-import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { categoryState, IToDo, toDoState } from "../atoms";
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
+
+  const categoryValue = useRecoilValue(categoryState);
+
+  console.log(categoryValue);
+
+  const CanMovecategories = categoryValue.filter(
+    (oldCategory) => oldCategory !== category
+  );
 
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
       currentTarget: { name },
     } = event;
-  
-
-    // 실행시킨 버튼으로 버튼의 category(name) 을 얻는다.
 
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
@@ -25,24 +30,16 @@ function ToDo({ text, category, id }: IToDo) {
   };
 
   return (
-    <li>
-      <span>{text}</span>
-      {category !== "DOING" ? (
-        <button name="DOING" onClick={onClick}>
-          Doing
-        </button>
-      ) : null}
-      {category !== "TO_DO" ? (
-        <button name="TO_DO" onClick={onClick}>
-          To Do
-        </button>
-      ) : null}
-      {category !== "DONE" ? (
-        <button name="DONE" onClick={onClick}>
-          Done
-        </button>
-      ) : null}
-    </li>
+    <>
+      <li>
+        <span>{text}</span>
+        {CanMovecategories.map((category, index) => (
+          <button key={category} name={category}>
+            {category}
+          </button>
+        ))}
+      </li>
+    </>
   );
 }
 
