@@ -1,9 +1,54 @@
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { categoryState, isDarkAtom, toDoState } from "../atoms";
 import CreateCategory from "./CreateCategory";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
+
+const Title = styled.h1`
+  font-size: 42px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const ThemeButtonContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 90%;
+`;
+
+const ThemeButton = styled.button`
+  padding: 15px 10px;
+  border-radius: 10px;
+  border: 1px solid ${(props) => props.theme.accentColor};
+  background-color: ${(props) => props.theme.bgColor};
+`;
+
+const ThemeButtonSpan = styled.span`
+  font-size: 17px;
+  color: ${(props) => props.theme.textColor};
+  background-color: #cba1a1;
+`;
+
+const StyledSelect = styled.select`
+  padding: 10px 20px;
+`;
+
+const SelectContainer = styled.div`
+  border: 1px red solid;
+  display: flex;
+  justify-content: center;
+`;
+
+const ListContainer = styled.div`
+  border: 1px red solid;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
 
 function ToDoList() {
   const toDos = useRecoilValue(toDoState);
@@ -17,29 +62,35 @@ function ToDoList() {
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
   return (
     <div>
-      <h1>To Dos</h1>
-      <button onClick={toggleTheme}>
-        {isDarkMode ? (
-          <span>밝은 테마로 전환</span>
-        ) : (
-          <span>어두운 테마로 전환</span>
-        )}
-      </button>
+      <Title>To Dos</Title>
+      <ThemeButtonContainer>
+        <ThemeButton onClick={toggleTheme}>
+          {isDarkMode ? (
+            <ThemeButtonSpan>밝은 테마로 전환</ThemeButtonSpan>
+          ) : (
+            <ThemeButtonSpan>어두운 테마로 전환</ThemeButtonSpan>
+          )}
+        </ThemeButton>
+      </ThemeButtonContainer>
       <hr />
       <CreateToDo />
       <ul>
-        <select onInput={onInput}>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-        {toDos
-          .filter((item) => item.category === currentCategory)
-          .map((toDo) => (
-            <ToDo key={toDo.id} {...toDo} />
-          ))}
+        <SelectContainer>
+          <StyledSelect onInput={onInput}>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </StyledSelect>
+        </SelectContainer>
+        <ListContainer>
+          {toDos
+            .filter((item) => item.category === currentCategory)
+            .map((toDo) => (
+              <ToDo key={toDo.id} {...toDo} />
+            ))}
+        </ListContainer>
       </ul>
 
       <CreateCategory />
