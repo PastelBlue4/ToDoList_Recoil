@@ -14,6 +14,11 @@ const TodoTitle = styled.h1`
   margin-bottom: 10px;
 `;
 
+const StyledForm = styled.form`
+  font-size: 22px;
+ 
+`;
+
 function CreateToDo() {
   const setToDos = useSetRecoilState(toDoState);
   const { register, handleSubmit, setValue } = useForm<IForm>();
@@ -27,7 +32,7 @@ function CreateToDo() {
   return (
     <>
       <TodoTitle>할 일 입력</TodoTitle>
-      <form onSubmit={handleSubmit(handleValid)}>
+      <StyledForm onSubmit={handleSubmit(handleValid)}>
         <input
           {...register("toDo", {
             required: "Please write a To Do",
@@ -35,7 +40,7 @@ function CreateToDo() {
           placeholder="Write a to do"
         />
         <button>할 일 추가.</button>
-      </form>
+      </StyledForm>
     </>
   );
 }

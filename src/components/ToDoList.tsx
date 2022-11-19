@@ -30,7 +30,6 @@ const ThemeButton = styled.button`
 const ThemeButtonSpan = styled.span`
   font-size: 17px;
   color: ${(props) => props.theme.textColor};
-  background-color: #cba1a1;
 `;
 
 const StyledSelect = styled.select`
@@ -38,7 +37,7 @@ const StyledSelect = styled.select`
 `;
 
 const SelectContainer = styled.div`
-  border: 1px red solid;
+  border: 1px ${(props) => props.theme.textColor} solid;
   display: flex;
   justify-content: center;
 `;

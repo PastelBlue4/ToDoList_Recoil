@@ -1,13 +1,2 @@
 {
-  "vscode-color-picker.languages": [
-    "html",
-    "css",
-    "python",
-    "jsonc",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue"
-  ]
 }
