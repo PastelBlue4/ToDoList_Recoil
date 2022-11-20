@@ -33,6 +33,7 @@ const StyledButton = styled.button`
   height: 40px;
   width: 100px;
   margin-left: 10px;
+  font-size: 16px;
   background-color: ${(props) => props.theme.buttonColor};
   border: 1px solid ${(props) => props.theme.buttonBorderColor};
   color: ${(props) => props.theme.textColor};
@@ -63,7 +64,7 @@ function CreateToDo() {
             })}
             placeholder="Write a to do"
           />
-          <StyledButton>할 일 추가.</StyledButton>
+          <StyledButton>추가하기</StyledButton>
         </StyledForm>
       </FormContainer>{" "}
     </>

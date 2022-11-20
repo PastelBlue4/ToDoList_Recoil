@@ -7,11 +7,12 @@ import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
 const Title = styled.h1`
-  font-size: 42px;
+  font-size: 30px;
   font-weight: 400;
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const ThemeButtonContainer = styled.div`
@@ -21,20 +22,21 @@ const ThemeButtonContainer = styled.div`
 `;
 
 const ThemeButton = styled.button`
-  padding: 15px 10px;
-  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  border-radius: 4px;
   border: 1px solid ${(props) => props.theme.buttonBorderColor};
   background-color: ${(props) => props.theme.bgColor};
-
+  color: ${(props) => props.theme.textColor};
   :hover {
     border: 1px solid ${(props) => props.theme.buttonBorderHoverColor};
-    background-color: ${(props) => props.theme.buttonBorderHoverColor};
+    background-color: ${(props) => props.theme.themeChangeButtonHoverColor};
+    color: ${(props) => props.theme.themeChangeTextHoverColor};
   }
 `;
 
 const ThemeButtonSpan = styled.span`
-  font-size: 17px;
-  color: ${(props) => props.theme.textColor};
+  font-size: 14px;
 `;
 
 const StyledSelect = styled.select`
@@ -61,15 +63,22 @@ const ListContainer = styled.div`
   align-items: center;
   flex-direction: column;
   width: 90%;
-  height: 600px;
+  height: auto;
+  min-height: 600px;
   background-color: ${(props) => props.theme.toDoCointainer};
 `;
 
 const Category = styled.span`
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 500;
   margin-bottom: 10px;
   color: ${(props) => props.theme.textColor};
+`;
+
+const EmptyToDo = styled.span`
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 400;
 `;
 
 function ToDoList() {
@@ -84,13 +93,13 @@ function ToDoList() {
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
   return (
     <div>
-      <Title>To Dos</Title>
+      <Title>ToDoList with Recoil</Title>
       <ThemeButtonContainer>
         <ThemeButton onClick={toggleTheme}>
           {isDarkMode ? (
-            <ThemeButtonSpan>밝은 테마로 전환</ThemeButtonSpan>
+            <ThemeButtonSpan>Light Theme</ThemeButtonSpan>
           ) : (
-            <ThemeButtonSpan>어두운 테마로 전환</ThemeButtonSpan>
+            <ThemeButtonSpan>Dark Theme</ThemeButtonSpan>
           )}
         </ThemeButton>
       </ThemeButtonContainer>
@@ -110,6 +119,9 @@ function ToDoList() {
       <TodoContainer>
         <Category>{currentCategory}</Category>
         <ListContainer>
+          {toDos.length < 1 ? (
+            <EmptyToDo>리스트가 비어 있습니다.</EmptyToDo>
+          ) : null}
           {toDos
             .filter((item) => item.category === currentCategory)
             .map((toDo) => (

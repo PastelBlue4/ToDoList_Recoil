@@ -11,5 +11,11 @@ declare module "styled-components" {
 
     buttonBorderColor: string;
     buttonBorderHoverColor: string;
+
+    categoryButtonColor: string;
+    categoryButtonHoverColor: string;
+
+    themeChangeTextHoverColor: string;
+    themeChangeButtonHoverColor: string;
   }
 }
