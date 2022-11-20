@@ -28,6 +28,7 @@ const ThemeButton = styled.button`
   border: 1px solid ${(props) => props.theme.buttonBorderColor};
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
+  cursor: pointer;
   :hover {
     border: 1px solid ${(props) => props.theme.buttonBorderHoverColor};
     background-color: ${(props) => props.theme.themeChangeButtonHoverColor};
@@ -50,6 +51,20 @@ const SelectContainer = styled.div`
   justify-content: end;
 `;
 
+const ChangeCreateTypeButton = styled.button`
+  width: 120px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid ${(props) => props.theme.buttonBorderColor};
+  background-color: ${(props) => props.theme.addButtonColor};
+  color: ${(props) => props.theme.textColor};
+  margin-left: 10px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${(props) => props.theme.addButtonHoverColor};
+  }
+`;
 const TodoContainer = styled.div`
   width: full;
   justify-content: center;
@@ -86,11 +101,14 @@ function ToDoList() {
   const categories = useRecoilValue(categoryState);
   const [currentCategory, setCurrentCategory] = useState("TO_DO");
   const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkAtom);
+  const [isCreateTodo, setIsCreateTodo] = useState(true);
+
   const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
     setCurrentCategory(e.currentTarget.value);
     console.log(e.currentTarget.value);
   };
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
+
   return (
     <div>
       <Title>ToDoList with Recoil</Title>
@@ -102,9 +120,13 @@ function ToDoList() {
             <ThemeButtonSpan>Dark Theme</ThemeButtonSpan>
           )}
         </ThemeButton>
+        <ChangeCreateTypeButton
+          onClick={() => setIsCreateTodo((prev) => !prev)}
+        >
+          {isCreateTodo ? "카테고리 추가하기" : "할일 추가하기"}
+        </ChangeCreateTypeButton>
       </ThemeButtonContainer>
-
-      <CreateToDo />
+      {isCreateTodo ? <CreateToDo /> : <CreateCategory />}
 
       <SelectContainer>
         <StyledSelect onInput={onInput}>
@@ -129,8 +151,6 @@ function ToDoList() {
             ))}
         </ListContainer>
       </TodoContainer>
-
-      <CreateCategory />
     </div>
   );
 }

@@ -20,7 +20,7 @@ const FormContainer = styled.div`
 `;
 
 const StyledInput = styled.input`
-  width: 300px;
+  width: 400px;
   height: 40px;
   color: black;
   ::placeholder {
@@ -33,6 +33,7 @@ const StyledButton = styled.button`
   height: 40px;
   width: 100px;
   margin-left: 10px;
+  cursor: pointer;
   font-size: 16px;
   background-color: ${(props) => props.theme.buttonColor};
   border: 1px solid ${(props) => props.theme.buttonBorderColor};
@@ -62,7 +63,7 @@ function CreateToDo() {
             {...register("toDo", {
               required: "Please write a To Do",
             })}
-            placeholder="Write a to do"
+            placeholder="할 일을 입력해 보세요."
           />
           <StyledButton>추가하기</StyledButton>
         </StyledForm>

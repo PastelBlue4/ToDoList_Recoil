@@ -5,7 +5,7 @@ export const darkTheme: DefaultTheme = {
   textColor: "#e9e5e5",
   toDoCointainer: "#515965",
 
-  buttonColor: "#2f3640",
+  buttonColor: "#3c4450",
   buttonHoverColor: "#747474",
 
   buttonBorderColor: "#bfc1c3",
@@ -16,6 +16,9 @@ export const darkTheme: DefaultTheme = {
 
   themeChangeTextHoverColor: "#6c5e4c",
   themeChangeButtonHoverColor: "#F0ECE3",
+
+  addButtonColor: "#3c4450",
+  addButtonHoverColor: "#747474",
 };
 
 export const lightTheme: DefaultTheme = {
@@ -34,4 +37,7 @@ export const lightTheme: DefaultTheme = {
 
   themeChangeTextHoverColor: "#e9e5e5",
   themeChangeButtonHoverColor: "#3c4450",
+
+  addButtonColor: "#F0ECE3",
+  addButtonHoverColor: "#b7b0a0",
 };

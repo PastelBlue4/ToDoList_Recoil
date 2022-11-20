@@ -7,10 +7,41 @@ interface ICategoryForm {
   category: string;
 }
 
-const StyledTitle = styled.h1`
-  font-size: 24px;
+const StyledForm = styled.form`
+  font-size: 22px;
+`;
+const FormContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+`;
+
+const StyledInput = styled.input`
+  width: 400px;
+  height: 40px;
+  color: black;
+  ::placeholder {
+    color: #5a4b4b;
+    font-size: 16px;
+  }
+`;
+
+const StyledButton = styled.button`
+  height: 40px;
+  width: 100px;
+  margin-left: 10px;
+  font-size: 16px;
+  background-color: ${(props) => props.theme.buttonColor};
+  border: 1px solid ${(props) => props.theme.buttonBorderColor};
   color: ${(props) => props.theme.textColor};
-  margin-top: 50px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${(props) => props.theme.buttonHoverColor};
+    border: 1px solid ${(props) => props.theme.buttonBorderHoverColor};
+  }
 `;
 
 function CreateCategory() {
@@ -24,14 +55,15 @@ function CreateCategory() {
   };
   return (
     <>
-      <StyledTitle>카테고리 추가하기.</StyledTitle>
-      <form onSubmit={handleSubmit(handleCategorySubmit)}>
-        <input
-          {...register("category", { required: "카테고리를 입력 해주세요." })}
-          placeholder="카테고리를 입력 해주세요."
-        />
-        <button>카테고리 추가</button>
-      </form>
+      <FormContainer>
+        <StyledForm onSubmit={handleSubmit(handleCategorySubmit)}>
+          <StyledInput
+            {...register("category", { required: "카테고리를 입력 해주세요." })}
+            placeholder="카테고리를 입력 해주세요."
+          />
+          <StyledButton>추가하기</StyledButton>
+        </StyledForm>
+      </FormContainer>
     </>
   );
 }

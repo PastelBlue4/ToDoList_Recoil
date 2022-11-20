@@ -17,5 +17,8 @@ declare module "styled-components" {
 
     themeChangeTextHoverColor: string;
     themeChangeButtonHoverColor: string;
+
+    addButtonColor: string;
+    addButtonHoverColor: string;
   }
 }
