@@ -4,7 +4,12 @@ declare module "styled-components" {
   export interface DefaultTheme {
     textColor: string;
     bgColor: string;
-    accentColor: string;
-    cardBgColor: string;
+    toDoCointainer: string;
+
+    buttonColor: string;
+    buttonHoverColor: string;
+
+    buttonBorderColor: string;
+    buttonBorderHoverColor: string;
   }
 }

@@ -23,8 +23,13 @@ const ThemeButtonContainer = styled.div`
 const ThemeButton = styled.button`
   padding: 15px 10px;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.accentColor};
+  border: 1px solid ${(props) => props.theme.buttonBorderColor};
   background-color: ${(props) => props.theme.bgColor};
+
+  :hover {
+    border: 1px solid ${(props) => props.theme.buttonBorderHoverColor};
+    background-color: ${(props) => props.theme.buttonBorderHoverColor};
+  }
 `;
 
 const ThemeButtonSpan = styled.span`
@@ -34,19 +39,37 @@ const ThemeButtonSpan = styled.span`
 
 const StyledSelect = styled.select`
   padding: 10px 20px;
+  margin-bottom: 10px;
 `;
 
 const SelectContainer = styled.div`
-  border: 1px ${(props) => props.theme.textColor} solid;
+  width: 90%;
   display: flex;
+  justify-content: end;
+`;
+
+const TodoContainer = styled.div`
+  width: full;
   justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ListContainer = styled.div`
-  border: 1px red solid;
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 90%;
+  height: 600px;
+  background-color: ${(props) => props.theme.toDoCointainer};
+`;
+
+const Category = styled.span`
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: ${(props) => props.theme.textColor};
 `;
 
 function ToDoList() {
@@ -71,18 +94,21 @@ function ToDoList() {
           )}
         </ThemeButton>
       </ThemeButtonContainer>
-      <hr />
+
       <CreateToDo />
-      <ul>
-        <SelectContainer>
-          <StyledSelect onInput={onInput}>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </StyledSelect>
-        </SelectContainer>
+
+      <SelectContainer>
+        <StyledSelect onInput={onInput}>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </StyledSelect>
+      </SelectContainer>
+
+      <TodoContainer>
+        <Category>{currentCategory}</Category>
         <ListContainer>
           {toDos
             .filter((item) => item.category === currentCategory)
@@ -90,7 +116,7 @@ function ToDoList() {
               <ToDo key={toDo.id} {...toDo} />
             ))}
         </ListContainer>
-      </ul>
+      </TodoContainer>
 
       <CreateCategory />
     </div>

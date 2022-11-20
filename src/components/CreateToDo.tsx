@@ -8,15 +8,39 @@ interface IForm {
   toDo: string;
 }
 
-const TodoTitle = styled.h1`
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
-`;
-
 const StyledForm = styled.form`
   font-size: 22px;
- 
+`;
+const FormContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+`;
+
+const StyledInput = styled.input`
+  width: 300px;
+  height: 40px;
+  color: black;
+  ::placeholder {
+    color: #5a4b4b;
+    font-size: 16px;
+  }
+`;
+
+const StyledButton = styled.button`
+  height: 40px;
+  width: 100px;
+  margin-left: 10px;
+  background-color: ${(props) => props.theme.buttonColor};
+  border: 1px solid ${(props) => props.theme.buttonBorderColor};
+  color: ${(props) => props.theme.textColor};
+
+  :hover {
+    background-color: ${(props) => props.theme.buttonHoverColor};
+    border: 1px solid ${(props) => props.theme.buttonBorderHoverColor};
+  }
 `;
 
 function CreateToDo() {
@@ -31,16 +55,17 @@ function CreateToDo() {
   };
   return (
     <>
-      <TodoTitle>할 일 입력</TodoTitle>
-      <StyledForm onSubmit={handleSubmit(handleValid)}>
-        <input
-          {...register("toDo", {
-            required: "Please write a To Do",
-          })}
-          placeholder="Write a to do"
-        />
-        <button>할 일 추가.</button>
-      </StyledForm>
+      <FormContainer>
+        <StyledForm onSubmit={handleSubmit(handleValid)}>
+          <StyledInput
+            {...register("toDo", {
+              required: "Please write a To Do",
+            })}
+            placeholder="Write a to do"
+          />
+          <StyledButton>할 일 추가.</StyledButton>
+        </StyledForm>
+      </FormContainer>{" "}
     </>
   );
 }

@@ -5,27 +5,33 @@ import { categoryState, IToDo, toDoState } from "../atoms";
 
 const ToDoContainer = styled.li`
   display: flex;
-  border: blue solid 1px;
-  flex-direction: column;
+  border-bottom: white solid 1px;
+  align-items: center;
+  width: 700px;
+  justify-content: space-between;
+  padding: 7px;
 `;
 
 const ToDoText = styled.span`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   text-align: center;
 `;
 
 const CategoryContainer = styled.div`
   display: flex;
-  margin-top: 5px;
   gap: 3px;
 `;
 
 const CategoryButton = styled.button`
-  background-color: white;
+  background-color: #cfcfcf;
   padding: 5px 10px;
-  border-radius: 12px;
+  border-radius: 3px;
   border: 1px black solid;
+
+  :last-child {
+    margin-right: 5px;
+  }
 `;
 
 function ToDo({ text, category, id }: IToDo) {
