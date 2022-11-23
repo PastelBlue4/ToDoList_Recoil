@@ -6,6 +6,10 @@ import CreateCategory from "./CreateCategory";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
+const Container = styled.div`
+  min-width: 600px;
+`;
+
 const Title = styled.h1`
   font-size: 30px;
   font-weight: 400;
@@ -105,12 +109,11 @@ function ToDoList() {
 
   const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
     setCurrentCategory(e.currentTarget.value);
-    console.log(e.currentTarget.value);
   };
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
 
   return (
-    <div>
+    <Container>
       <Title>ToDoList with Recoil</Title>
       <ThemeButtonContainer>
         <ThemeButton onClick={toggleTheme}>
@@ -151,7 +154,7 @@ function ToDoList() {
             ))}
         </ListContainer>
       </TodoContainer>
-    </div>
+    </Container>
   );
 }
 

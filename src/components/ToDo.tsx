@@ -3,6 +3,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { categoryState, IToDo, toDoState } from "../atoms";
 
+import deleteIcon from "../image/delete.svg";
+
 const ToDoContainer = styled.li`
   display: flex;
   border-bottom: white solid 1px;
@@ -18,6 +20,13 @@ const ToDoContainer = styled.li`
   :last-child {
     margin-bottom: 30px;
   }
+`;
+
+const TodoInfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  align-items: center;
 `;
 
 const ToDoText = styled.span`
@@ -48,6 +57,13 @@ const CategoryButton = styled.button`
   }
 `;
 
+const DeleteButton = styled.button``;
+
+const DeleteIcon = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
 
@@ -58,10 +74,7 @@ function ToDo({ text, category, id }: IToDo) {
   );
 
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const {
-      currentTarget: { name },
-    } = event;
-
+    const name = event.currentTarget.name;
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
       const newToDo = { text, id, category: name as any };
@@ -73,18 +86,34 @@ function ToDo({ text, category, id }: IToDo) {
     });
   };
 
+  const onDelete = () => {
+    setToDos((oldToDos) => {
+      const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
+
+      return [
+        ...oldToDos.slice(0, targetIndex),
+        ...oldToDos.slice(targetIndex + 1),
+      ];
+    });
+  };
+
   return (
     <>
       <ToDoContainer>
-        <ToDoText>{text}</ToDoText>
-        <CategoryContainer>
-          {CanMoveCategories.map((category) => (
-            <CategoryButton key={category} name={category} onClick={onClick}>
-              {category}
-            </CategoryButton>
-          ))}
-        </CategoryContainer>
-      </ToDoContainer>
+        <TodoInfoContainer>
+          <ToDoText>{text}</ToDoText>
+          <CategoryContainer>
+            {CanMoveCategories.map((category) => (
+              <CategoryButton key={category} name={category} onClick={onClick}>
+                {category}
+              </CategoryButton>
+            ))}
+          </CategoryContainer>
+        </TodoInfoContainer>
+        <DeleteButton onClick={onDelete}>
+          <DeleteIcon src={deleteIcon} alt="delteIcon" />
+        </DeleteButton>
+      </ToDoContainer>{" "}
     </>
   );
 }
