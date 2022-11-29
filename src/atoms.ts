@@ -8,7 +8,7 @@ export interface IToDo {
 
 export const isDarkAtom = atom({
   key: "isDark",
-  default: true,
+  default: false,
 });
 
 export const toDoState = atom<IToDo[]>({
@@ -19,4 +19,9 @@ export const toDoState = atom<IToDo[]>({
 export const categoryState = atom({
   key: "categories",
   default: ["TO_DO", "DOING", "DONE"],
+});
+
+export const currentCategoryAtom = atom({
+  key: "currentCategory",
+  default: "TO_DO",
 });

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { categoryState, isDarkAtom, toDoState } from "../atoms";
+import {
+  categoryState,
+  currentCategoryAtom,
+  isDarkAtom,
+  toDoState,
+} from "../atoms";
 import CreateCategory from "./CreateCategory";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
@@ -103,7 +108,8 @@ const EmptyToDo = styled.span`
 function ToDoList() {
   const toDos = useRecoilValue(toDoState);
   const categories = useRecoilValue(categoryState);
-  const [currentCategory, setCurrentCategory] = useState("TO_DO");
+  const [currentCategory, setCurrentCategory] =
+    useRecoilState(currentCategoryAtom);
   const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkAtom);
   const [isCreateTodo, setIsCreateTodo] = useState(true);
 

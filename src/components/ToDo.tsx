@@ -1,7 +1,7 @@
 import React from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { categoryState, IToDo, toDoState } from "../atoms";
+import { categoryState, isDarkAtom, IToDo, toDoState } from "../atoms";
 
 import deleteIcon from "../image/delete.svg";
 
@@ -73,7 +73,7 @@ function ToDo({ text, category, id }: IToDo) {
     (oldCategory) => oldCategory !== category
   );
 
-  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onCategotyChange = (event: React.MouseEvent<HTMLButtonElement>) => {
     const name = event.currentTarget.name;
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
@@ -104,7 +104,11 @@ function ToDo({ text, category, id }: IToDo) {
           <ToDoText>{text}</ToDoText>
           <CategoryContainer>
             {CanMoveCategories.map((category) => (
-              <CategoryButton key={category} name={category} onClick={onClick}>
+              <CategoryButton
+                key={category}
+                name={category}
+                onClick={onCategotyChange}
+              >
                 {category}
               </CategoryButton>
             ))}
