@@ -73,7 +73,7 @@ function ToDo({ text, category, id }: IToDo) {
     (oldCategory) => oldCategory !== category
   );
 
-  const onCategotyChange = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onCategoryChange = (event: React.MouseEvent<HTMLButtonElement>) => {
     const name = event.currentTarget.name;
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
@@ -107,7 +107,7 @@ function ToDo({ text, category, id }: IToDo) {
               <CategoryButton
                 key={category}
                 name={category}
-                onClick={onCategotyChange}
+                onClick={onCategoryChange}
               >
                 {category}
               </CategoryButton>

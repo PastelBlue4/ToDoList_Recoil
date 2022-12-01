@@ -103,6 +103,7 @@ const EmptyToDo = styled.span`
   margin-top: 20px;
   font-size: 22px;
   font-weight: 400;
+  border: 1px solid black;
 `;
 
 function ToDoList() {
